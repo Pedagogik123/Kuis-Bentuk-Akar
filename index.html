@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#e7f6eb">
+  <title>Kuis Matematika SMA | Sifat-Sifat Bentuk Akar</title>
+  <link rel="stylesheet" href="style.css">
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['\\(', '\\)'], ['$', '$']], displayMath: [['\\[', '\\]']] },
+      svg: { fontCache: 'global' },
+      options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Beranda kuis">
+        <span class="brand-mark">√</span>
+        <span><strong>Ruang Matematika</strong><small>Belajar • Berlatih • Bertumbuh</small></span>
+      </a>
+      <div class="top-tag"><span class="status-dot"></span> Kuis Interaktif SMA</div>
+    </header>
+
+    <main>
+      <section class="login-screen" id="loginScreen">
+        <div class="login-watermark" aria-hidden="true">MASUKKAN NAMA LENGKAP · MASUKKAN PASSWORD ·</div>
+        <div class="login-card">
+          <div class="login-emblem">√</div>
+          <span class="eyebrow">SELAMAT DATANG</span>
+          <h1>Masuk ke <span>Ruang Matematika</span></h1>
+          <p class="login-intro">Silakan masuk untuk memulai kuis sifat-sifat bentuk akar.</p>
+          <div class="role-switch" role="group" aria-label="Pilih jenis login">
+            <button type="button" class="role-button active" id="studentRoleBtn">Login Siswa</button>
+            <button type="button" class="role-button" id="teacherRoleBtn">Login Guru</button>
+          </div>
+          <form id="loginForm" autocomplete="off">
+            <label class="login-label" for="fullName" id="nameLabel">Nama lengkap siswa</label>
+            <input class="login-input" id="fullName" name="fullName" type="text" placeholder="Masukkan nama lengkap" required maxlength="80">
+            <label class="login-label" for="loginPassword">Password</label>
+            <input class="login-input" id="loginPassword" name="loginPassword" type="password" placeholder="Masukkan password" required>
+            <p class="login-error" id="loginError" role="alert" hidden></p>
+            <button class="btn btn-primary login-submit" type="submit">Masuk dan Mulai <span>→</span></button>
+          </form>
+          <div class="login-hint"><span>✦</span> Siswa: <strong>12345</strong> · Guru: <strong>admin12345</strong></div>
+        </div>
+        <div class="login-side-copy"><span>LEARN WITH CONFIDENCE</span><strong>Setiap langkah kecil<br>membawa pemahaman.</strong><small>MATEMATIKA SMA · SIFAT-SIFAT BENTUK AKAR</small></div>
+      </section>
+      <div id="appContent" hidden>
+      <section class="teacher-panel" id="teacherPanel" hidden>
+        <div class="teacher-heading">
+          <div><span class="eyebrow">AREA GURU</span><h1>Rekap Hasil <span>Ujian Siswa</span></h1><p>Hasil ujian yang tersimpan pada perangkat/browser ini.</p></div>
+          <button class="btn btn-outline" id="teacherLogoutBtn" type="button">Keluar</button>
+        </div>
+        <div class="teacher-stats">
+          <div class="teacher-stat"><small>Total pekerjaan</small><strong id="totalAttempts">0</strong></div>
+          <div class="teacher-stat"><small>Rata-rata nilai</small><strong id="averageScore">0</strong></div>
+          <div class="teacher-stat"><small>Nilai tertinggi</small><strong id="highestScore">0</strong></div>
+        </div>
+        <div class="teacher-table-wrap"><table class="teacher-table"><thead><tr><th>No.</th><th>Nama siswa</th><th>Tanggal & waktu</th><th>Benar</th><th>Nilai</th></tr></thead><tbody id="resultsTableBody"><tr><td colspan="5">Belum ada hasil ujian.</td></tr></tbody></table></div>
+        <div class="teacher-actions"><button class="btn btn-primary" id="downloadResultsBtn" type="button">Unduh Hasil (CSV) ↓</button><button class="btn btn-outline" id="refreshResultsBtn" type="button">Muat Ulang</button></div>
+        <p class="teacher-note">Catatan: versi ini menyimpan hasil pada browser/perangkat yang digunakan. Untuk mengumpulkan hasil dari banyak perangkat siswa ke satu dashboard guru, aplikasi perlu dihubungkan ke database online seperti Firebase.</p>
+      </section>
+      <section class="hero" id="studentHero">
+        <div class="hero-copy">
+          <span class="eyebrow">MATEMATIKA · SMA</span>
+          <h1>Sifat-Sifat <span>Bentuk Akar</span></h1>
+          <p>Uji pemahamanmu melalui 20 soal pilihan ganda. Kerjakan dengan teliti, pahami sifatnya, dan lihat pembahasan setelah menjawab.</p>
+          <div class="hero-pills">
+            <span>✦ 20 soal</span><span>◷ Sesuai kecepatanmu</span><span>✓ Pembahasan otomatis</span>
+          </div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+          <div class="math-card math-card-main">\( \sqrt{a \cdot b} \)</div>
+          <div class="math-card math-card-small">\( \sqrt{a^2}=|a| \)</div>
+          <div class="leaf leaf-one"></div><div class="leaf leaf-two"></div>
+          <span class="spark spark-one">✳</span><span class="spark spark-two">＋</span>
+        </div>
+      </section>
+
+      <section class="quiz-layout" id="quizArea">
+        <aside class="side-panel">
+          <div class="panel-heading"><span class="mini-icon">▦</span><div><strong>Perjalanan Kuis</strong><small>Ikuti progres belajarmu</small></div></div>
+          <div class="progress-meta"><span>Progres</span><strong id="progressText">0 dari 20</strong></div>
+          <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+          <div class="stat-row">
+            <div class="stat-box"><span class="stat-symbol">◎</span><small>Terjawab</small><strong id="answeredCount">0</strong></div>
+            <div class="stat-box"><span class="stat-symbol">★</span><small>Skor sementara</small><strong id="scoreCount">0</strong></div>
+          </div>
+          <div class="question-map-title">Pilih nomor soal</div>
+          <div class="question-map" id="questionMap" aria-label="Navigasi soal"></div>
+          <div class="side-note"><span>✦</span><p>Tips: sederhanakan bentuk akar terlebih dahulu sebelum menjumlahkan atau mengurangkan.</p></div>
+        </aside>
+
+        <section class="question-panel" aria-live="polite">
+          <div class="question-topline">
+            <span class="question-kicker" id="questionTopic">DASAR BENTUK AKAR</span>
+            <span class="question-counter" id="questionCounter">SOAL 01 / 20</span>
+          </div>
+          <div class="question-heading">
+            <span class="question-number" id="questionNumber">01</span>
+            <h2 id="questionText">Memuat soal...</h2>
+          </div>
+          <p class="instruction">Pilih satu jawaban yang paling tepat.</p>
+          <div class="options" id="optionsList"></div>
+          <div class="feedback" id="feedbackBox" hidden>
+            <div class="feedback-icon" id="feedbackIcon">✓</div>
+            <div><strong id="feedbackTitle">Pembahasan</strong><p id="feedbackText"></p></div>
+          </div>
+          <div class="question-actions">
+            <button class="btn btn-quiet" id="prevBtn" type="button">← Sebelumnya</button>
+            <span class="autosave-note"><span class="tiny-check">✓</span> Jawaban tersimpan selama ujian</span>
+            <button class="btn btn-primary" id="nextBtn" type="button">Berikutnya <span>→</span></button>
+          </div>
+        </section>
+      </section>
+
+      <section class="result-panel" id="resultPanel" hidden>
+        <div class="result-emblem">✦</div>
+        <span class="eyebrow">KUIS SELESAI</span>
+        <h2>Hebat, kamu sudah menyelesaikan kuis!</h2>
+        <p class="result-intro">Berikut hasil ujian sifat-sifat bentuk akar yang telah kamu kerjakan.</p>
+        <div class="score-ring" id="scoreRing"><div><strong id="finalScore">0</strong><span>/ 100</span></div></div>
+        <div class="result-stats">
+          <div><strong id="finalCorrect">0</strong><span>Jawaban benar</span></div>
+          <div><strong id="finalWrong">0</strong><span>Jawaban belum tepat</span></div>
+          <div><strong>20</strong><span>Total soal</span></div>
+        </div>
+        <p class="result-message" id="resultMessage"></p>
+        <div class="result-actions">
+          <button class="btn btn-primary" id="reviewBtn" type="button">Tinjau Pembahasan</button>
+          <button class="btn btn-outline" id="restartBtn" type="button">Ujian Baru ↻</button>
+        </div>
+      </section>
+      </div>
+    </main>
+
+    <footer><span>Ruang Matematika</span><span>Latihan hari ini, pemahaman untuk nanti.</span></footer>
+  </div>
+</body>
+</html>
